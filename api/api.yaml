@@ -1,0 +1,45 @@
+openapi: 3.0.0
+info:
+  title: Test habit service API
+  version: 0.1.0
+  description: Test API for getting habit
+
+servers:
+  - url: http://127.0.0.1:8080
+    description: Local development
+
+paths:
+  /habits/{id}:
+    get:
+      summary: Get habit by ID
+      operationId: getHabitByID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Habit ID
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Habit'
+        '404':
+          description: Not Found
+components:
+  schemas:
+    Habit:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 123
+        name:
+          type: string
+          example: "Alentev Kolomiagy Gold"
+      required:
+        - id
+        - name
