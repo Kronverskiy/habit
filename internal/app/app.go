@@ -1,6 +1,7 @@
 package app
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
@@ -13,6 +14,11 @@ import (
 func Run() {
 	server := rest.NewHabitHandler()
 
+	cfg, err := loadConfig()
+	if err != nil {
+		log.Fatalf("load app config: %s", err.Error())
+	}
+
 	r := chi.NewMux()
 
 	r.Use(middleware.Cors)
@@ -21,7 +27,7 @@ func Run() {
 
 	s := &http.Server{
 		Handler: h,
-		Addr:    "0.0.0.0:8080",
+		Addr:    fmt.Sprintf("%s:%s", cfg.Server.Host, cfg.Server.Port),
 	}
 
 	log.Fatal(s.ListenAndServe())

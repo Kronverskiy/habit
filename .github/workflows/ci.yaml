@@ -36,3 +36,6 @@ jobs:
 
       - name: Check for uncommitted changes
         run: git diff --exit-code || (echo '❌ Found uncommitted changes. Please run `make generate-handlers` and commit the result.' && exit 1)
+
+      - name: Run tests
+        run: make test
