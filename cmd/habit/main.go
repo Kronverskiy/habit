@@ -1,7 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"github.com/Kronverskiy/habit/internal/app"
+)
 
 func main() {
-	fmt.Printf("Application started!\n")
+	app.Run()
 }
